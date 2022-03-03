@@ -1,0 +1,88 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+    <title>Word-Prediction (NLP)</title>
+</head>
+<body>
+  <div class="banner"
+  <div class="navbar">
+                    
+    <img src="" alt="">
+    <ul>
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="#">Models</a></li>
+        <li><a href="about_us.html">About Us</a></li>
+
+    </ul>
+  </div>
+  <div style="padding: 20px;
+                    margin-top: 30px;
+                    background-color: 
+                        rgba(135, 206, 235, 0.5);
+                  height: 800px;">
+
+            <h4 style="text-align: center;">Natural Language Proccessing</h2>
+            <h1 class="display-1" style="color: green;text-align: center;">Next Word Prediction</h1>
+            <h1>Fixed Top Navigation Bar</h1>
+            <p>Write Something Write Something
+              Write Something Write Something..</p>
+              
+              <ul style="align-items: center;" class="pagination pagination-lg">
+                <li ><a href="#" id="out">{{prediction}}</a></li>
+              </ul>
+              <form action="/" method="post" id="form1">
+                <div class="form-group">
+                  <input id="input" name="input" class="input" onkeyup="submitForm()">
+                  <button class="button" type="submit" name="submit" for="form1" >Search</button>
+                  <!--<textarea class="form-control" name="predict" onkeyup="edValueKeyPress()"  id="input" rows="3"></textarea>-->
+                </div>     
+              </form>
+            
+        </div>
+        </div>   
+           
+           
+           <script type="text/javascript">
+              
+              var formOne = document.getElementById('form1');
+
+              function submitForm(event){
+                  event.preventDefault(); 
+                  var edValue = document.getElementById("input");
+                  var txtInput = edValue.value;
+                  var len = txtInput.length;
+                  if(txtInput[len-1]===" "){
+                      const sub = txtInput.split(" ");
+                      const Last3=[] ;
+                      if(sub.length>3){
+                        for(let i = 0;i<3;i++)
+                        {
+                          
+                            Last3[i] = sub[sub.length-2-i];
+                          
+                        }
+                        var str = Last3[2]+ "_" + Last3[1]+ "_"+ Last3[0];
+                      }  // Prevent default submit behavior.
+                      var xhttp = new XMLHttpRequest();
+                      xhttp.onreadystatechange = function() {
+                        console.log(this.status);
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("bottom").innerHTML = xhttp.responseText;
+                        }
+                      };
+                      xhttp.open("POST", "/", true);
+                      xhttp.send();   
+                    }
+
+                    formOne.addEventListener('input', submitForm);
+
+
+             
+
+
+              
+              </script>
+    </body>
