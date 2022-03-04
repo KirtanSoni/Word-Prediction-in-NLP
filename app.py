@@ -1,9 +1,7 @@
 from cgitb import text
-from flask import Flask,send_file
-from flask import request,jsonify
-from flask import Flask, render_template, request
+import os
+from flask import Flask,render_template, request,jsonify
 from predict import predict_next_words
-import string
 import pickle
 from tensorflow.keras.models import load_model
 
@@ -13,32 +11,45 @@ with open('token/tokenizer1.pkl', 'rb') as handle:
 model = load_model('nextword3.h5')
 
 
-app = Flask(__name__)
-txt = ""
-req_dict=None 
-req_json=None
+photos = os.path.join('static', 'image')
+svg = os.path.join('static', 'svgs')
 
-@app.route("/", methods=['GET', 'POST'])
+app = Flask(__name__)
+
+app.static_folder = 'static'
+app.config['img_folder'] = photos 
+app.config['svg_folder'] = svg
+
+txt = ""
+req_dict = None
+
+
+@app.route('/about_us')
+def about_us():
+    devimage = os.path.join(app.config['img_folder'], 'ak.jpg')
+    fblogo = os.path.join(app.config['svg_folder'], 'facebook-brands.svg')
+    linkedinlogo = os.path.join(app.config['svg_folder'], 'linkedin-brands.svg')
+    githublogo = os.path.join(app.config['svg_folder'], 'github-brands.svg')
+    return render_template("about_us.html", devimage=devimage, facebook=fblogo, linkedin=linkedinlogo, github=githublogo)
+
+
+@app.route("/")
 def home():
+    return render_template("Home.html")
+    
+
+@app.route("/predict", methods=['GET', 'POST'])
+def predict():
     global req_dict,req_json
-    '''if(request.method=='POST'):
-        req_dict=dict(request.form)
-        req_json=jsonify(req_dict)
-        print(req_dict)
-    return render_template("Home.html", prediction="Need more words")'''
     if request.method == "POST":
-        global txt
-        form  =  request.form
-        predict = form['input_temp']
-        txt = txt + predict + " "
-        if predict == "":
-            return render_template("Home.html", prediction="Need more words")
-        predict = predict.split()[-3:]
+        req_dict=request.get_json()
+        predict=[]
+        predict = req_dict['str'].split("_")
         predict = predict_next_words(model, tokenizer, predict)
         print(predict)
-        return render_template("Home.html", prediction=predict)
+        return predict
     else:
-        return render_template("Home.html", prediction="Need more words")
+        return "need more words"
 
 
 if __name__ == "__main__":

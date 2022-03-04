@@ -2,9 +2,56 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+
 <!DOCTYPE html>
 <head>
-    <title>Word-Prediction (NLP)</title>
+  <script type="text/javascript">
+              
+    //var formOne = document.getElementById('form1');
+
+    function submitForm(){
+        //event.preventDefault(); 
+        var edValue = document.getElementById("input");
+        var txtInput = edValue.value;
+        var len = txtInput.length;
+        if(txtInput[len-1]===" "){
+            const sub = txtInput.split(" ");
+            const Last3=[] ;
+            if(sub.length>3){
+              for(let i = 0;i<3;i++)
+              {
+                
+                  Last3[i] = sub[sub.length-2-i];
+                
+              }
+            var str = '{"str":"'+Last3[2]+ "_" + Last3[1]+ "_"+ Last3[0]+'"}';
+              // Prevent default submit behavior.
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+              console.log(this.status);
+              if (this.readyState == 4 && this.status == 200) {
+                 document.getElementById("out").innerHTML = xhttp.responseText;
+              }
+            };
+            xhttp.open("POST", "/predict", true);
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            //str = str.replace(/^\s+|\s+$/g, "");
+            json_str= JSON.parse(str)
+            console.log(json_str);
+            xhttp.send(JSON.stringify(json_str));
+            }  
+          }
+
+          //formOne.addEventListener('input', submitForm);
+
+
+   
+          }
+
+    
+            </script>
+    
 </head>
 <body>
   <div class="banner"
@@ -12,9 +59,9 @@
                     
     <img src="" alt="">
     <ul>
-        <li><a href="index.html" >Home</a></li>
+        <li><a href="/" >Home</a></li>
         <li><a href="#">Models</a></li>
-        <li><a href="about_us.html">About Us</a></li>
+        <li><a href="/about_us">About Us</a></li>
 
     </ul>
   </div>
@@ -26,63 +73,19 @@
 
             <h4 style="text-align: center;">Natural Language Proccessing</h2>
             <h1 class="display-1" style="color: green;text-align: center;">Next Word Prediction</h1>
-            <h1>Fixed Top Navigation Bar</h1>
-            <p>Write Something Write Something
-              Write Something Write Something..</p>
               
-              <ul style="align-items: center;" class="pagination pagination-lg">
-                <li ><a href="#" id="out">{{prediction}}</a></li>
+              <ul style="align-self: center;" >
+                <li  ><a href="#" id="out"></a></li>
               </ul>
-              <form action="/" method="post" id="form1">
-                <div class="form-group">
-                  <input id="input" name="input" class="input" onkeyup="submitForm()">
-                  <button class="button" type="submit" name="submit" for="form1" >Search</button>
-                  <!--<textarea class="form-control" name="predict" onkeyup="edValueKeyPress()"  id="input" rows="3"></textarea>-->
-                </div>     
-              </form>
+              
+              <div class="form-group">
+                <textarea class="form-control" name="predict" onkeyup="submitForm()"  id="input" rows="3"></textarea>
+              </div>     
+              
             
         </div>
         </div>   
            
            
-           <script type="text/javascript">
-              
-              var formOne = document.getElementById('form1');
-
-              function submitForm(event){
-                  event.preventDefault(); 
-                  var edValue = document.getElementById("input");
-                  var txtInput = edValue.value;
-                  var len = txtInput.length;
-                  if(txtInput[len-1]===" "){
-                      const sub = txtInput.split(" ");
-                      const Last3=[] ;
-                      if(sub.length>3){
-                        for(let i = 0;i<3;i++)
-                        {
-                          
-                            Last3[i] = sub[sub.length-2-i];
-                          
-                        }
-                        var str = Last3[2]+ "_" + Last3[1]+ "_"+ Last3[0];
-                      }  // Prevent default submit behavior.
-                      var xhttp = new XMLHttpRequest();
-                      xhttp.onreadystatechange = function() {
-                        console.log(this.status);
-                        if (this.readyState == 4 && this.status == 200) {
-                            document.getElementById("bottom").innerHTML = xhttp.responseText;
-                        }
-                      };
-                      xhttp.open("POST", "/", true);
-                      xhttp.send();   
-                    }
-
-                    formOne.addEventListener('input', submitForm);
-
-
-             
-
-
-              
-              </script>
+          
     </body>
