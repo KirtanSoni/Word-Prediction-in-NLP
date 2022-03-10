@@ -4,8 +4,8 @@
         <title>
             Next word predcition
         </title>
-            <link rel="stylesheet" href="style1.css">
-            <link rel="stylesheet" href="all.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='all.min.css') }}">
         </head>
         <body>
             <div class="banner">
@@ -14,55 +14,54 @@
                     
                     <img src="" alt="">
                     <ul>
-                        <li><a href="index.html" >Home</a></li>
+                        <li><a href="/" >Home</a></li>
                         <li><a href="#">Models</a></li>
-                        <li><a href="about_us.html">About Us</a></li>
+                        <li><a href="/about_us">About Us</a></li>
 
                     </ul>
                 </div>
                 <div class="container">
-                <div class="header">
-                    <h1>Our Team</h1>
-                </div>
-                <div class="sub-container">
-                <div class="teams">
-                    <img src="ak.jpg" style="border-radius: 50%;" width="300" height="300" alt="">
-                    <div class="name">Chintan</div>
+                    <div class="header">
+                        <h1>Our Team</h1>
+                    </div>
+                    <div class="sub-container">
+                    <div class="teams">        
+                    <img src="https://media-exp1.licdn.com/dms/image/D4D35AQHoK0E414hyOQ/profile-framedphoto-shrink_200_200/0/1634828438512?e=1646478000&v=beta&t=SA6ursn8LrkBJfsUXJPuSN_OVVRQZhvSPYvsohFdeLU" style="border-radius: 50%;" width="300" height="300" alt="">
+                    <div class="name">Kirtan Soni</div>
                     <div class="desig">Student</div>
+                    <div class="about">Roll No : 151 <br> ID : 19CEUON138 </div>
                     <div class="social-links">
-                        <a href="#"><img width="26" src="facebook-brands.svg" alt=""></a>
-                        <a href="#"><img width="23" src="instagram-brands.svg" alt=""></a>
-                        <a href="#"><img width="23" src="linkedin-brands.svg" alt=""></a>
-                        <a href="#"><img width="25" src="github-brands.svg" alt=""></a>
+                        <a href="#"><img width="26" src="{{ facebook }}" alt=""></a>
+                        <a href="#"><img width="23" src="{{ linkedin }}" alt=""></a>
+                        <a href="#"><img width="25" src="{{ github }}" alt=""></a>
                     </div>
                 
                 
                 
                 </div>
                 <div class="teams">
-                    <img src="ak.jpg" style="border-radius: 50%;" width="300" height="300" alt="">
-                    <div class="name">Kirtan</div>
+                    <img src="https://media-exp1.licdn.com/dms/image/C5603AQHav3TOGgofkA/profile-displayphoto-shrink_800_800/0/1610293466097?e=1651708800&v=beta&t=1fuHP0uaFO0WA1EEDnAduxOvKcCwFQSCTL2GF2iznJA" style="border-radius: 50%;" width="300" height="300" alt="">
+                    <div class="name">Chintan Solanki</div>
                     <div class="desig">Student</div>
-                    <div class="about"></div>
+                    <div class="about">Roll No : 148 <br> ID : 19CEUBS162 </div>
                     <div class="social-links">
-                        <a href="#"><img width="26" src="facebook-brands.svg" alt=""></a>
-                        <a href="#"><img width="23" src="linkedin-brands.svg" alt=""></a>
-                        <a href="#"><img width="25" src="github-brands.svg" alt=""></a>
-
+                        <a href="#"><img width="26" src="{{ facebook }}" alt=""></a>
+                        <a href="#"><img width="23" src="{{ linkedin }}" alt=""></a>
+                        <a href="#"><img width="25" src="{{ github }}" alt=""></a>
                     </div>
                 
                 
                 
                 </div>
                 <div class="teams">
-                    <img src="ak.jpg" style="border-radius: 50%;" width="300" height="300" alt="">
-                    <div class="name">Kaushal</div>
+                    <img src="{{ devimage }}" style="border-radius: 50%;" width="300" height="300" alt="">
+                    <div class="name">Kaushal Shah</div>
                     <div class="desig">Student</div>
-                    <div class="about"></div>
+                    <div class="about">Roll No : 142 <br> ID : 19CEUOS160 </div>
                     <div class="social-links">
-                        <a href="#"><img width="26" src="facebook-brands.svg" alt=""></a>
-                        <a href="#"><img width="23" src="linkedin-brands.svg" alt=""></a>
-                        <a href="#"><img width="25" src="github-brands.svg" alt=""></a>
+                        <a href="#"><img width="26" src="{{ facebook }}" alt=""></a>
+                        <a href="#"><img width="23" src="{{ linkedin }}" alt=""></a>
+                        <a href="#"><img width="25" src="{{ github }}" alt=""></a>
                     </div>
                 
                 
